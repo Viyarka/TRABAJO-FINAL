@@ -1,0 +1,47 @@
+#!/bin/bash
+
+menu() {
+    clear
+    echo "1. Crear archivo"
+    echo "2. Borrar archivo"
+    echo "3. Salir"
+}
+
+crear_archivo() {
+    echo "Ingrese el nombre del archivo a crear:"
+    read nombre_archivo
+    touch "$nombre_archivo"
+    echo "Archivo creado: $nombre_archivo"
+}
+
+borrar_archivo() {
+    echo "Ingrese el nombre del archivo a borrar:"
+    read nombre_archivo
+    if [ -f "$nombre_archivo" ]; then
+rm "$nombre_archivo"
+        echo "Archivo borrado: $nombre_archivo"
+    else
+        echo "El archivo $nombre_archivo no existe."
+    fi
+}
+
+while true; do
+    menu
+    read -p "Ingrese una opción: " opcion
+    case $opcion in
+        1)
+            crear_archivo
+            ;;
+        2)
+            borrar_archivo
+            ;;
+        3)
+            break
+            ;;
+*)
+            echo "Opción inválida. Por favor, ingrese una opción válida."
+            ;;
+    esac
+    read -p "Presione Enter para reiniciar"
+done
+
